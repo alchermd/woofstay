@@ -29,3 +29,10 @@ To run administrative commands, open up another terminal window and use `docker 
 ```console
 $ docker container exec woofstay python manage.py migrate
 ```
+
+### Running the test suite
+
+
+```console
+$ docker container exec woofstay python manage.py behave
+```
