@@ -11,8 +11,8 @@ Pet boarding management application
 ### Getting Started
 
 ```console
-$ docker image build -t alchermd/woofstay .
-$ docker container run -v $PWD:/opt/app -p 80:8000 --name woofstay --rm alchermd/woofstay
+$ cp .env.example .env # edit as necessary
+$ docker compose up --build
 Watching for file changes with StatReloader
 Performing system checks...
 
@@ -23,16 +23,14 @@ Starting development server at http://0.0.0.0:8000/
 Quit the server with CONTROL-C
 ```
 
-To run administrative commands, open up another terminal window and use `docker container exec`. Example:
-
+To run administrative commands, open up another terminal window and use `docker compose exec django`. Example:
 
 ```console
-$ docker container exec woofstay python manage.py migrate
+$ docker compose exec django python manage.py migrate
 ```
 
 ### Running the test suite
 
-
 ```console
-$ docker container exec woofstay python manage.py behave
+$ docker compose exec django python manage.py behave
 ```
