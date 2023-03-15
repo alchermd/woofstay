@@ -52,3 +52,22 @@ Feature: Pet boarding
     When I board "Cholo" to "MyPetHotel" at "12:66 PM"
 
     Then I get an error saying that the given time is invalid
+
+  Scenario: A pet is checked out on an invalid time
+    Given I empty the "Pets" table
+
+    And I create the following pets:
+      | name  | breed |
+      | Cholo | Husky |
+
+    And I empty the "Hotels" table
+
+    And I create the following hotels:
+      | name       | hourly_rate |
+      | MyPetHotel | 50          |
+
+    When I board "Cholo" to "MyPetHotel" at "07:30 AM"
+
+    And "Cholo" checks out from "MyPetHotel" at "12:66 AM"
+
+    Then I get an error saying that the given time is invalid

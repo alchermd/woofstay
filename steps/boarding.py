@@ -47,9 +47,12 @@ def step_impl(context, pet_name, hotel_name):
 
 @when('"{pet_name}" checks out from "{hotel_name}" at "{checkout_time}"')
 def step_impl(context, pet_name, hotel_name, checkout_time):
-    pet = Pet.objects.get(name=pet_name)
-    hotel = Hotel.objects.get(name=hotel_name)
-    hotel.checkout(pet, checkout_time=checkout_time)
+    try:
+        pet = Pet.objects.get(name=pet_name)
+        hotel = Hotel.objects.get(name=hotel_name)
+        hotel.checkout(pet, checkout_time=checkout_time)
+    except Exception as e:
+        context.exception = e
 
 
 @then('"{pet_name}" is boarded')
