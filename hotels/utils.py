@@ -9,7 +9,7 @@ def time_string_to_datetime(time_string):
     try:
         # Convert 7:30PM to a "03/25/2020 07:30PM" datetime object
         date_format = "%m/%d/%Y"
-        time_format = "%H:%M %p"
+        time_format = "%I:%M %p"
         current_date_string = timezone.now().strftime(date_format)
         return datetime.strptime(
             f"{current_date_string} {time_string}",

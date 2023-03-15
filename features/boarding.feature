@@ -34,7 +34,7 @@ Feature: Pet boarding
 
     When I board "Cholo" to "MyPetHotel" at "07:30 AM"
 
-    And "Cholo" checks out from "MyPetHotel" at "12:00 AM"
+    And "Cholo" checks out from "MyPetHotel" at "12:00 PM"
 
     Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "225"
 
@@ -97,7 +97,7 @@ Feature: Pet boarding
     When I board "Cholo" to "MyPetHotel" at "07:30 AM"
     And I board "Jodi" to "MyPetHotel" at "10:30 AM"
 
-    And "Cholo" checks out from "MyPetHotel" at "12:00 AM"
+    And "Cholo" checks out from "MyPetHotel" at "12:00 PM"
     And "Jodi" checks out from "MyPetHotel" at "01:00 PM"
 
     Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "225"
