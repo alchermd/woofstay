@@ -26,7 +26,7 @@ class Hotel(models.Model):
         else:
             checkout_time = time_string_to_datetime(checkout_time)
 
-        latest_boarding_record = self.boarding_records.last()
+        latest_boarding_record = self.boarding_records.filter(pet=pet).last()
         latest_boarding_record.checkout_time = checkout_time
         latest_boarding_record.save()
 
