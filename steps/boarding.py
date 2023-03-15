@@ -1,5 +1,6 @@
 from behave import given, when, then
 
+from hotels.errors import InvalidTimeFormat
 from hotels.models import Hotel
 from hotels.services import compute_last_boarding_fee
 from pets.models import Pet
@@ -29,9 +30,12 @@ def step_impl(context):
 
 @when('I board "{pet_name}" to "{hotel_name}" at "{boarding_time}"')
 def step_impl(context, pet_name, hotel_name, boarding_time):
-    pet = Pet.objects.get(name=pet_name)
-    hotel = Hotel.objects.get(name=hotel_name)
-    hotel.board(pet, boarding_time=boarding_time)
+    try:
+        pet = Pet.objects.get(name=pet_name)
+        hotel = Hotel.objects.get(name=hotel_name)
+        hotel.board(pet, boarding_time=boarding_time)
+    except Exception as e:
+        context.exception = e
 
 
 @when('I board "{pet_name}" to "{hotel_name}"')
@@ -60,3 +64,8 @@ def step_impl(context, pet_name, hotel_name, expected_boarding_fee):
     hotel = Hotel.objects.get(name=hotel_name)
     computed_boarding_fee = compute_last_boarding_fee(pet=pet, hotel=hotel)
     assert computed_boarding_fee == expected_boarding_fee, f"{computed_boarding_fee} is not {expected_boarding_fee}"
+
+
+@then("I get an error saying that the given time is invalid")
+def step_impl(context):
+    assert isinstance(context.exception, InvalidTimeFormat), "The time is deemed valid"

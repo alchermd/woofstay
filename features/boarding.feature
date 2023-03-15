@@ -35,3 +35,20 @@ Feature: Pet boarding
     And "Cholo" checks out from "MyPetHotel" at "12:00 AM"
 
     Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "225"
+
+  Scenario: A pet is boarded on an invalid time
+    Given I empty the "Pets" table
+
+    And I create the following pets:
+      | name  | breed |
+      | Cholo | Husky |
+
+    And I empty the "Hotels" table
+
+    And I create the following hotels:
+      | name       | hourly_rate |
+      | MyPetHotel | 50          |
+
+    When I board "Cholo" to "MyPetHotel" at "12:66 PM"
+
+    Then I get an error saying that the given time is invalid
