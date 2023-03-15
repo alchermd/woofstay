@@ -1,7 +1,7 @@
 from behave import given, when, then
 
 from hotels.errors import InvalidTimeFormat
-from hotels.models import Hotel
+from hotels.models import Hotel, BoardingRecord
 from hotels.services import compute_last_boarding_fee
 from pets.models import Pet
 
@@ -72,3 +72,8 @@ def step_impl(context, pet_name, hotel_name, expected_boarding_fee):
 @then("I get an error saying that the given time is invalid")
 def step_impl(context):
     assert isinstance(context.exception, InvalidTimeFormat), "The time is deemed valid"
+
+
+@given('I empty the "BoardingRecords" table')
+def step_impl(context):
+    BoardingRecord.objects.all().delete()

@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 
 from hotels.errors import InvalidTimeFormat
+from hotels.utils import time_string_to_datetime
 from pets.models import Pet
 
 
@@ -15,17 +16,7 @@ class Hotel(models.Model):
         if boarding_time is None:
             boarding_time = timezone.now()
         else:
-            try:
-                # Convert 7:30PM to a "03/25/2020 07:30PM" datetime object
-                date_format = "%m/%d/%Y"
-                time_format = "%H:%M %p"
-                current_date_string = timezone.now().strftime(date_format)
-                boarding_time = datetime.strptime(
-                    f"{current_date_string} {boarding_time}",
-                    f"{date_format} {time_format}",
-                )
-            except ValueError:
-                raise InvalidTimeFormat("Invalid time format. Must be something like '07:30 PM'.")
+            boarding_time = time_string_to_datetime(boarding_time)
 
         self.boarding_records.create(pet=pet, boarding_time=boarding_time)
 
@@ -33,17 +24,7 @@ class Hotel(models.Model):
         if checkout_time is None:
             checkout_time = timezone.now()
         else:
-            try:
-                # Convert 7:30PM to a "03/25/2020 07:30PM" datetime object
-                date_format = "%m/%d/%Y"
-                time_format = "%H:%M %p"
-                current_date_string = timezone.now().strftime(date_format)
-                checkout_time = datetime.strptime(
-                    f"{current_date_string} {checkout_time}",
-                    f"{date_format} {time_format}",
-                )
-            except ValueError:
-                raise InvalidTimeFormat("Invalid time format. Must be something like '07:30 PM'.")
+            checkout_time = time_string_to_datetime(checkout_time)
 
         latest_boarding_record = self.boarding_records.last()
         latest_boarding_record.checkout_time = checkout_time

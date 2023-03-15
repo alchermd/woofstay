@@ -30,6 +30,8 @@ Feature: Pet boarding
       | name       | hourly_rate |
       | MyPetHotel | 50          |
 
+    And I empty the "BoardingRecords" table
+
     When I board "Cholo" to "MyPetHotel" at "07:30 AM"
 
     And "Cholo" checks out from "MyPetHotel" at "12:00 AM"
@@ -49,6 +51,8 @@ Feature: Pet boarding
       | name       | hourly_rate |
       | MyPetHotel | 50          |
 
+    And I empty the "BoardingRecords" table
+
     When I board "Cholo" to "MyPetHotel" at "12:66 PM"
 
     Then I get an error saying that the given time is invalid
@@ -65,6 +69,8 @@ Feature: Pet boarding
     And I create the following hotels:
       | name       | hourly_rate |
       | MyPetHotel | 50          |
+
+    And I empty the "BoardingRecords" table
 
     When I board "Cholo" to "MyPetHotel" at "07:30 AM"
 
