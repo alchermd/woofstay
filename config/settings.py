@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pets.apps.PetsConfig',
     'hotels.apps.HotelsConfig',
+    'pages.apps.PagesConfig',
     'behave_django',
 ]
 
