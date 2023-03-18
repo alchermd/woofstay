@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'hotels.apps.HotelsConfig',
     'pages.apps.PagesConfig',
     'hotel_admin.apps.HotelAdminConfig',
+    'owners.apps.OwnersConfig',
     'behave_django',
 ]
 
