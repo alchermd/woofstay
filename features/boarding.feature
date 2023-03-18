@@ -4,8 +4,8 @@ Feature: Pet boarding
     Given I empty the "Pets" table
 
     And I create the following pets:
-      | name  | breed |
-      | Cholo | Husky |
+      | name  | breed | type |
+      | Cholo | Husky | Dog  |
 
     And I empty the "Hotels" table
 
@@ -21,8 +21,8 @@ Feature: Pet boarding
     Given I empty the "Pets" table
 
     And I create the following pets:
-      | name  | breed |
-      | Cholo | Husky |
+      | name  | breed | type |
+      | Cholo | Husky | Dog  |
 
     And I empty the "Hotels" table
 
@@ -42,8 +42,8 @@ Feature: Pet boarding
     Given I empty the "Pets" table
 
     And I create the following pets:
-      | name  | breed |
-      | Cholo | Husky |
+      | name  | breed | type |
+      | Cholo | Husky | Dog  |
 
     And I empty the "Hotels" table
 
@@ -61,8 +61,8 @@ Feature: Pet boarding
     Given I empty the "Pets" table
 
     And I create the following pets:
-      | name  | breed |
-      | Cholo | Husky |
+      | name  | breed | type |
+      | Cholo | Husky | Dog  |
 
     And I empty the "Hotels" table
 
@@ -82,9 +82,9 @@ Feature: Pet boarding
     Given I empty the "Pets" table
 
     And I create the following pets:
-      | name  | breed |
-      | Cholo | Husky |
-      | Jodi  | Bully |
+      | name  | breed | type |
+      | Cholo | Husky | Dog  |
+      | Jodi  | Bully | Dog  |
 
     And I empty the "Hotels" table
 
