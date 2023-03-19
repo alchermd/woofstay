@@ -2,9 +2,6 @@
 
 {% block content %}
 
-
-    <!-- =======================
-    Page Banner START -->
     <section class="pt-4 pt-md-5 pb-0">
         <div class="container">
             <div class="row">
@@ -17,28 +14,20 @@
             </div>
         </div>
     </section>
-    <!-- =======================
-    Page Banner END -->
 
-    <!-- =======================
-    Main content START -->
     <section>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <form class="vstack gap-4">
 
-                        <!-- Owner Detail START -->
                         <div class="card shadow">
-                            <!-- Card header -->
                             <div class="card-header border-bottom">
                                 <h5 class="mb-0">Pet Details</h5>
                             </div>
 
-                            <!-- Card body -->
                             <div class="card-body">
                                 <div class="row g-3">
-                                    <!-- Owner name -->
                                     <div class="col-12">
                                         <label class="form-label">Pet Name</label>
                                         <input type="text" class="form-control" placeholder="My name is...">
@@ -54,7 +43,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- State -->
                                     <div class="col-md-6">
                                         <label class="form-label">Breed</label>
                                         <select class="form-select js-choice" data-search-enabled="true">
@@ -67,17 +55,45 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Owner Detail END -->
 
-                        <!-- Button -->
+
+                        <div class="card shadow">
+                            <div class="card-header border-bottom">
+                                <h5 class="mb-0">Owner Details</h5>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" placeholder="John">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" placeholder="Doe">
+                                    </div>
+
+
+                                    <div class="col-6">
+                                        <label class="form-label">Contact Number</label>
+                                        <input type="text" class="form-control" placeholder="+639123456789">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Address</label>
+                                        <textarea rows="10" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="text-end">
-                            <a href="listing-added.html" class="btn btn-primary mb-0">Save Pet</a>
+                            <a href="#" class="btn btn-primary mb-0">Save</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    <!-- =======================
-    Main content END -->
 {% endblock %}
