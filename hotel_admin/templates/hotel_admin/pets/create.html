@@ -1,7 +1,8 @@
 {% extends "hotel_admin/base.html" %}
 
-{% block content %}
+{% load crispy_forms_tags %}
 
+{% block content %}
     <section class="pt-4 pt-md-5 pb-0">
         <div class="container">
             <div class="row">
@@ -16,84 +17,27 @@
     </section>
 
     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <form class="vstack gap-4">
-
-                        <div class="card shadow">
-                            <div class="card-header border-bottom">
-                                <h5 class="mb-0">Pet Details</h5>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <label class="form-label">Pet Name</label>
-                                        <input type="text" class="form-control" placeholder="My name is...">
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <label class="form-label">Type</label>
-                                        <select class="form-select js-choice" data-search-enabled="true">
-                                            <option value="">Select Type</option>
-                                            <option selected>Dog</option>
-                                            <option>Cat</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="form-label">Breed</label>
-                                        <select class="form-select js-choice" data-search-enabled="true">
-                                            <option value="">Select Breed</option>
-                                            <option>Siberian Husky</option>
-                                            <option>American Bully</option>
-                                            <option>Norfolk Terrier</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card shadow">
-                            <div class="card-header border-bottom">
-                                <h5 class="mb-0">Owner Details</h5>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-6">
-                                        <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control" placeholder="John">
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Doe">
-                                    </div>
-
-
-                                    <div class="col-6">
-                                        <label class="form-label">Contact Number</label>
-                                        <input type="text" class="form-control" placeholder="+639123456789">
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label">Address</label>
-                                        <textarea rows="10" class="form-control"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="text-end">
-                            <a href="#" class="btn btn-primary mb-0">Save</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        {% crispy form %}
     </section>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+            integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+    <script>
+        $("#id_pet_type").on("change", function () {
+            const petType = $(this).val();
+
+            $.get("{% url 'hotel-admin:breed-list' %}?pet_type=" + petType, function (data) {
+                $("#id_pet_breed").empty();
+                data.forEach(([label, value]) => {
+                    $("#id_pet_breed").append(`<option value="${value}">${label}</option>`)
+                });
+            });
+        });
+    </script>
 {% endblock %}
