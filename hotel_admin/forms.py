@@ -100,7 +100,7 @@ sample_breeds = {
 class PetWithOwnerCreationForm(forms.Form):
     pet_name = forms.CharField(label="Pet Name", max_length=255)
     pet_type = forms.ChoiceField(label="Type", choices=Pet.Type.choices, initial=Pet.Type.DOG)
-    pet_breed = forms.CharField(label="Breed", max_length=255, widget=forms.Select)
+    pet_breed = forms.ChoiceField(label="Breed")
     owner_first_name = forms.CharField(label="First Name", max_length=255)
     owner_last_name = forms.CharField(label="Last Name", max_length=255, required=False)
     owner_contact_number = forms.CharField(label="Contact Number", max_length=255)
@@ -109,6 +109,9 @@ class PetWithOwnerCreationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+
+        if pet_type := self.data.get("pet_type"):
+            self.fields['pet_breed'].choices = sample_breeds[pet_type]
 
         self.helper.layout = Layout(
             Div(
