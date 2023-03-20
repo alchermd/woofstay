@@ -29,8 +29,10 @@
             referrerpolicy="no-referrer">
     </script>
     <script>
-        $("#id_pet_type").on("change", function () {
-            const petType = $(this).val();
+        const petTypeEl = $("#id_pet_type");
+
+        function updateBreeds() {
+            const petType = petTypeEl.val();
 
             $.get("{% url 'hotel-admin:breed-list' %}?pet_type=" + petType, function (data) {
                 $("#id_pet_breed").empty();
@@ -38,6 +40,11 @@
                     $("#id_pet_breed").append(`<option value="${value}">${label}</option>`)
                 });
             });
+        }
+
+        $(document).ready(function () {
+            updateBreeds();
+            petTypeEl.on("change load", updateBreeds);
         });
     </script>
 {% endblock %}
