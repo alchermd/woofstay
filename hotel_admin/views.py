@@ -1,18 +1,20 @@
 from django.contrib import messages
 from django.http import HttpResponseBadRequest, JsonResponse, HttpResponseNotFound
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
 
 from hotel_admin.forms import PetWithOwnerCreationForm, sample_breeds
 from owners.services import create_owner
+from pets.models import Pet
 from pets.services import create_pet
 
 
 class CreatePetView(FormView):
     template_name = "hotel_admin/pets/create.html"
     form_class = PetWithOwnerCreationForm
-    success_url = reverse_lazy("hotel-admin:create-pet")
+    success_url = reverse_lazy("hotel-admin:pet-list")
 
     def form_valid(self, form):
         create_pet(
@@ -39,3 +41,9 @@ class BreedListView(View):
                 return HttpResponseNotFound()
             return JsonResponse(breeds, safe=False)
         return HttpResponseBadRequest()
+
+
+class PetListView(View):
+    def get(self, request):
+        pets = Pet.objects.all().order_by("-id")
+        return render(request, "hotel_admin/pets/list.html", {"pets": pets})

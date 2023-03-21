@@ -1,0 +1,73 @@
+{% extends "hotel_admin/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border rounded-3">
+                        <!-- Card header START -->
+                        <div class="card-header border-bottom">
+                            <div class="d-sm-flex justify-content-between align-items-center">
+                                <h5 class="mb-2 mb-sm-0">Pet Records</h5>
+
+                                <a href="{% url "hotel-admin:create-pet" %}" class="btn btn-primary">Create Pet</a>
+                            </div>
+                        </div>
+                        <!-- Card header END -->
+
+                        <!-- Card body START -->
+                        <div class="card-body">
+                            <!-- Hotel room list START -->
+                            <div class="table-responsive border-0">
+                                <table class="table align-middle p-4 mb-0 table-hover table-shrink">
+                                    <!-- Table head -->
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th scope="col" class="border-0 rounded-start">#</th>
+                                        <th scope="col" class="border-0">Name</th>
+                                        <th scope="col" class="border-0">Type</th>
+                                        <th scope="col" class="border-0">Breed</th>
+                                        <th scope="col" class="border-0">Owner Name</th>
+                                        <th scope="col" class="border-0 rounded-end">Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <!-- Table body START -->
+                                    <tbody class="border-top-0">
+                                    {% for pet in pets %}
+
+                                        <tr>
+                                            <td><h6 class="mb-0">{{ pet.id }}</h6></td>
+                                            <td>
+                                                <h6 class="mb-0">
+                                                    <a href="#">
+                                                        {{ pet.name }}
+                                                    </a>
+                                                </h6>
+                                            </td>
+                                            <td>{{ pet.type }}</td>
+                                            <td>{{ pet.breed }}</td>
+                                            <td><a href="#">Aljon</a></td>
+                                            <td><a href="#" class="btn btn-sm btn-light mb-0">View</a></td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="999"><p class="text-center">No pet records yet.</p></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <!-- Table body END -->
+                                </table>
+                            </div>
+                            <!-- Hotel room list END -->
+                        </div>
+                        <!-- Card body END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
