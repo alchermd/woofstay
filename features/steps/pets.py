@@ -1,10 +1,10 @@
-from behave import when, then
+from behave import then, step
 
 from pets.models import Pet
 from pets.services import create_pet
 
 
-@when('I add "{pet_name}" the "{pet_breed}" "{pet_type}" into the system')
+@step('I add "{pet_name}" the "{pet_breed}" "{pet_type}" into the system')
 def step_impl(context, pet_name, pet_breed, pet_type):
     create_pet(name=pet_name, breed=pet_breed, type=pet_type)
 
