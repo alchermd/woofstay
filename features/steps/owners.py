@@ -44,3 +44,10 @@ def step_impl(context, first_name, last_name, pet_name):
     pet = Pet.objects.get(name=pet_name)
     owner = Owner.objects.get(first_name=first_name, last_name=last_name)
     assert owner in pet.owners.all()
+
+
+@then('I get "{first_name}" "{last_name}"\'s record when I fetching "{pet_name}"\'s primary owner')
+def step_impl(context, first_name, last_name, pet_name):
+    pet = Pet.objects.get(name=pet_name)
+    owner = Owner.objects.get(first_name=first_name, last_name=last_name)
+    assert pet.primary_owner == owner

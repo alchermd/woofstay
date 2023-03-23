@@ -19,3 +19,8 @@ class Pet(models.Model):
 
     def add_owner(self, owner: Owner):
         self.owners.add(owner)
+
+    @property
+    def primary_owner(self):
+        # TODO: Make this more dynamic and not just index based
+        return self.owners.first()

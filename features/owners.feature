@@ -22,8 +22,21 @@ Feature: Owner records
 
     And I empty the "Pets" table
 
-    Then I add "Cholo" the "Husky" "Dog" into the system
+    And I add "Cholo" the "Husky" "Dog" into the system
 
     When I set "Micah" "Batayola" as "Cholo"'s owner
 
     Then I get "Micah" "Batayola"'s record when I fetch "Cholo"'s owner records
+
+  Scenario: A Pet's first Owner is their primary Owner
+    Given I empty the "Owners" table
+
+    And I add "Micah" "Batayola", with contact "+123456789", and address "123 Easy Street" into the system
+    And I add "Aljon" "Doloiras", with contact "+987654321", and address "123 Easy Street" into the system
+    And I empty the "Pets" table
+    And I add "Cholo" the "Husky" "Dog" into the system
+
+    When I set "Micah" "Batayola" as "Cholo"'s owner
+    And I set "Aljon" "Doloiras" as "Cholo"'s owner
+
+    Then I get "Micah" "Batayola"'s record when I fetching "Cholo"'s primary owner

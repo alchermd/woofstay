@@ -50,7 +50,7 @@
                                             </td>
                                             <td>{{ pet.type }}</td>
                                             <td>{{ pet.breed }}</td>
-                                            <td><a href="#">Aljon</a></td>
+                                            <td><a href="#">{{ pet.primary_owner|default_if_none:"" }}</a></td>
                                             <td><a href="#" class="btn btn-sm btn-light mb-0">View</a></td>
                                         </tr>
                                     {% empty %}

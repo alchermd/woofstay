@@ -17,17 +17,18 @@ class CreatePetView(FormView):
     success_url = reverse_lazy("hotel-admin:pet-list")
 
     def form_valid(self, form):
-        create_pet(
+        pet = create_pet(
             name=form.cleaned_data["pet_name"],
             type=form.cleaned_data["pet_type"],
             breed=form.cleaned_data["pet_breed"],
         )
-        create_owner(
+        owner = create_owner(
             first_name=form.cleaned_data["owner_first_name"],
             last_name=form.cleaned_data["owner_last_name"],
             contact_number=form.cleaned_data["owner_contact_number"],
             address=form.cleaned_data["owner_address"],
         )
+        pet.add_owner(owner)
 
         messages.success(self.request, "Pet record has been created!")
         return super().form_valid(form)
