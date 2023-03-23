@@ -3,3 +3,4 @@ behave-django==1.4.0
 psycopg2==2.9.5
 django-crispy-forms==2.0
 crispy-bootstrap5==0.7
+behave~=1.2.6
