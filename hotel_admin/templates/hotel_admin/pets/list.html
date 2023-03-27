@@ -43,7 +43,7 @@
                                             <td><h6 class="mb-0">{{ pet.id }}</h6></td>
                                             <td>
                                                 <h6 class="mb-0">
-                                                    <a href="#">
+                                                    <a href="{% url "hotel-admin:pet-detail" pk=pet.pk %}">
                                                         {{ pet.name }}
                                                     </a>
                                                 </h6>

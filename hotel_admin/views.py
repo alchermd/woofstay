@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponseBadRequest, JsonResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
@@ -48,3 +48,9 @@ class PetListView(View):
     def get(self, request):
         pets = Pet.objects.all().order_by("-id")
         return render(request, "hotel_admin/pets/list.html", {"pets": pets})
+
+
+class PetDetailView(View):
+    def get(self, request, pk):
+        pet = get_object_or_404(Pet, pk=pk)
+        return render(request, "hotel_admin/pets/detail.html", {"pet": pet})
