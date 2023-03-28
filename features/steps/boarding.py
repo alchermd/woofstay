@@ -77,3 +77,9 @@ def step_impl(context):
 @given('I empty the "BoardingRecords" table')
 def step_impl(context):
     BoardingRecord.objects.all().delete()
+
+
+@then('"{record_count:d}" records are saved on "{pet_name}"\'s boarding history')
+def step_impl(context, record_count, pet_name):
+    pet = Pet.objects.get(name=pet_name)
+    assert pet.boarding_records.count() == record_count
