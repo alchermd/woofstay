@@ -1,9 +1,7 @@
-from datetime import datetime
-
+import math
 from django.db import models
 from django.utils import timezone
 
-from hotels.errors import InvalidTimeFormat
 from hotels.utils import time_string_to_datetime
 from pets.models import Pet
 
@@ -30,6 +28,9 @@ class Hotel(models.Model):
         latest_boarding_record.checkout_time = checkout_time
         latest_boarding_record.save()
 
+    def __str__(self):
+        return self.name
+
 
 class BoardingRecord(models.Model):
     hotel = models.ForeignKey(Hotel, related_name="boarding_records", on_delete=models.CASCADE)
@@ -37,3 +38,21 @@ class BoardingRecord(models.Model):
     is_active = models.BooleanField(default=True)
     boarding_time = models.DateTimeField()
     checkout_time = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.pet} -> {self.hotel}"
+
+    @property
+    def total_fee(self):
+        total_fee = self.hours * self.hotel.hourly_rate
+
+        return math.floor(total_fee)
+
+    @property
+    def hours(self):
+        end = self.boarding_time
+        if end is None:
+            end = timezone.now()
+
+        total_hours = (self.checkout_time - end).seconds / 3600
+        return math.ceil(total_hours)

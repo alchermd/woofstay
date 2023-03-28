@@ -17,7 +17,7 @@ Feature: Pet boarding
 
     Then "Cholo" is boarded
 
-  Scenario: A pet's boarding fee is computed by how many hours they stayed
+  Scenario: A pet's boarding fee is computed by how many hours they stayed, with the hours rounded up and the total rounded down
     Given I empty the "Pets" table
 
     And I create the following pets:
@@ -36,7 +36,8 @@ Feature: Pet boarding
 
     And "Cholo" checks out from "MyPetHotel" at "12:00 PM"
 
-    Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "225"
+    # Half hours are counted as full
+    Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "250"
 
   Scenario: A pet is boarded on an invalid time
     Given I empty the "Pets" table
@@ -100,4 +101,5 @@ Feature: Pet boarding
     And "Cholo" checks out from "MyPetHotel" at "12:00 PM"
     And "Jodi" checks out from "MyPetHotel" at "01:00 PM"
 
-    Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "225"
+    Then "Cholo"'s boarding fee for his stay at "MyPetHotel" would be "250"
+    And "Jodi"'s boarding fee for his stay at "MyPetHotel" would be "150"

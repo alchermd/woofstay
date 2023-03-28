@@ -2,7 +2,6 @@ from behave import given, when, then
 
 from hotels.errors import InvalidTimeFormat
 from hotels.models import Hotel, BoardingRecord
-from hotels.services import compute_last_boarding_fee
 from pets.models import Pet
 
 
@@ -65,7 +64,7 @@ def step_impl(context, pet_name):
 def step_impl(context, pet_name, hotel_name, expected_boarding_fee):
     pet = Pet.objects.get(name=pet_name)
     hotel = Hotel.objects.get(name=hotel_name)
-    computed_boarding_fee = compute_last_boarding_fee(pet=pet, hotel=hotel)
+    computed_boarding_fee = pet.boarding_records.filter(hotel=hotel).last().total_fee
     assert computed_boarding_fee == expected_boarding_fee, f"{computed_boarding_fee} is not {expected_boarding_fee}"
 
 

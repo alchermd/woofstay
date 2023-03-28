@@ -24,3 +24,6 @@ class Pet(models.Model):
     def primary_owner(self):
         # TODO: Make this more dynamic and not just index based
         return self.owners.first()
+
+    def __str__(self):
+        return f"{self.name} the {self.breed}"
