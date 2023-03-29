@@ -1,0 +1,79 @@
+{% extends "hotel_admin/base.html" %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border rounded-3">
+                        <!-- Card header START -->
+                        <div class="card-header border-bottom">
+                            <div class="d-sm-flex justify-content-between align-items-center">
+                                <h5 class="mb-2 mb-sm-0">Boarding Records</h5>
+
+                                <a href="{% url "hotel-admin:create-pet" %}" class="btn btn-primary">
+                                    Create Boarding Record
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="bg-light rounded p-3 d-none d-lg-block">
+                                <div class="row row-cols-7 justify-content-between g-4">
+                                    <div class="col"><h6 class="mb-0">Pet</h6></div>
+                                    <div class="col"><h6 class="mb-0">Hotel</h6></div>
+                                    <div class="col"><h6 class="mb-0">Active</h6></div>
+                                    <div class="col"><h6 class="mb-0">Boarding Time</h6></div>
+                                    <div class="col"><h6 class="mb-0">Checkout Time</h6></div>
+                                    <div class="col"><h6 class="mb-0">Rate x Hours</h6></div>
+                                    <div class="col"><h6 class="mb-0">Total</h6></div>
+                                </div>
+                            </div>
+                            {% for boarding_record in boarding_records %}
+                                <!-- Table data -->
+                                <div class="row align-items-md-center justify-content-between border-bottom px-2 py-4">
+                                    <div class="col">
+                                        <p>{{ boarding_record.pet }}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>{{ boarding_record.hotel }}</p>
+                                    </div>
+                                    <div class="col">
+                                        {% if boarding_record.is_active %}
+                                            <h2><i class="h1 fa fa-check text-success"></i></h2>
+                                        {% else %}
+                                            <p>Finished</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <p>{{ boarding_record.boarding_time|date:"m/d/Y" }}</p>
+                                        <p>{{ boarding_record.boarding_time|date:"H:i A" }}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>{{ boarding_record.checkout_time|date:"m/d/Y" }}</p>
+                                        <p>{{ boarding_record.checkout_time|date:"H:i A" }}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>&#8369;{{ boarding_record.hotel.hourly_rate }}
+                                            x {{ boarding_record.hours }}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-decoration-underline fw-bolder">
+                                            &#8369;{{ boarding_record.total_fee }}</p>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <!-- Table data -->
+                                <div class="row px-2 py-4">
+                                    <div class="col">
+                                        <p class="text-center">No records yet.</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

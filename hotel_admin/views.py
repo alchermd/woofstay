@@ -6,6 +6,7 @@ from django.views import View
 from django.views.generic import FormView
 
 from hotel_admin.forms import PetWithOwnerCreationForm, sample_breeds
+from hotels.models import BoardingRecord
 from owners.services import create_owner
 from pets.models import Pet
 from pets.services import create_pet
@@ -54,3 +55,9 @@ class PetDetailView(View):
     def get(self, request, pk):
         pet = get_object_or_404(Pet, pk=pk)
         return render(request, "hotel_admin/pets/detail.html", {"pet": pet})
+
+
+class BoardingRecordListView(View):
+    def get(self, request):
+        boarding_records = BoardingRecord.objects.all()
+        return render(request, "hotel_admin/boarding-records/list.html", {"boarding_records": boarding_records})
